@@ -1,3 +1,4 @@
+#coding=utf-8
 """
 A simple example for Reinforcement Learning using table lookup Q-learning method.
 An agent "o" is on the left of a 1 dimensional world, the treasure is on the rightmost location.
@@ -19,7 +20,7 @@ EPSILON = 0.9   # greedy police
 ALPHA = 0.1     # learning rate
 GAMMA = 0.9    # discount factor
 MAX_EPISODES = 13   # maximum episodes
-FRESH_TIME = 0.3    # fresh time for one move
+FRESH_TIME = 1    # fresh time for one move
 
 
 def build_q_table(n_states, actions):
@@ -86,7 +87,7 @@ def rl():
 
             A = choose_action(S, q_table)
             S_, R = get_env_feedback(S, A)  # take action & get next state and reward
-            q_predict = q_table.ix[S, A]
+            q_predict = q_table.ix[S, A]            // 估计值
             if S_ != 'terminal':
                 q_target = R + GAMMA * q_table.iloc[S_, :].max()   # next state is not terminal
             else:
